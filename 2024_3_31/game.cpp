@@ -1,19 +1,19 @@
-#include<iostream>
-#include<cstdlib>
-#include<cstring>
-#include<string>
-#include<set>
-#include<vector>
+//#include<iostream>
+//#include<cstdlib>
+//#include<cstring>
+//#include<string>
+//#include<set>
+//#include<vector>
+//#include <random>
+//using namespace std;
 
-using namespace std;
-
-int main()
-{
-	int* p1 = (int*)malloc(sizeof(int));
-	int* p2 = (int*)realloc(p1,sizeof(int) * 10);
-	int* p3 = (int*)calloc(5, sizeof(int));
-	return 0;
-}
+//int main()
+//{
+//	int* p1 = (int*)malloc(sizeof(int));
+//	int* p2 = (int*)realloc(p1,sizeof(int) * 10);
+//	int* p3 = (int*)calloc(5, sizeof(int));
+//	return 0;
+//}
 //class A
 //{
 //public:

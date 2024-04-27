@@ -2,19 +2,39 @@
 #include<string>
 using namespace std;
 
-
-
 int main()
 {
-	string s1 = "hello world";
-	//s1.insert(2, 1,'k');
-	//s1.insert(s1.begin()+2, 'k');
-	//s1.resize(20,'k');
-	s1.reserve(50);
-	s1.reserve(5);
-	cout << s1;
+	string s1 = "bit.cpp.zip";
+	int pos = s1.rfind('.');
+	cout << s1.substr(pos);
 	return 0;
 }
+//int main()
+//{
+//	string url = "https://cplusplus.com/reference/string/string/";
+//	int pos = url.find("://");
+//	if (pos != string::npos)
+//	{
+//		cout << url.substr(0, pos)<<endl;
+//	}
+//	int pos1 = url.find('/',pos + 3 );
+//	if (pos1 != string::npos)
+//	{
+//		cout << url.substr(pos + 3, pos1 - pos - 3)<<endl;
+//	}
+//	cout << url.substr(pos1);
+//}
+//int main()
+//{
+//	string s1 = "hello world";
+//	//s1.insert(2, 1,'k');
+//	//s1.insert(s1.begin()+2, 'k');
+//	//s1.resize(20,'k');
+//	s1.reserve(50);
+//	s1.reserve(5);
+//	cout << s1;
+//	return 0;
+//}
 //int main()
 //{
 //	string s1 = "hello";
