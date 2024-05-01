@@ -2,13 +2,69 @@
 #include<cstdio>
 using namespace std;
 
+
+class A
+{
+private:
+	int a;
+public:
+	A(int b=1):a(b)
+	{
+		cout << "A(int b)" << endl;
+	}
+	A(const A& a)
+	{
+		this->a = a.a;
+		cout << "A(const A& a)" << endl;
+	}
+	~A()
+	{
+		cout << "~A" << endl;
+	}
+	A& operator=(const A& b)
+	{
+		this->a = b.a;
+		cout << "operator=(const A& b)" << endl;
+		return *this;
+	}
+	void* operator new(size_t n)
+	{
+		cout << "operator new"<<endl;
+		return malloc(n);
+	}
+	void* operator new[](size_t n)
+	{
+		cout << "operator new[]" << endl;
+		return malloc(n);
+	}
+	void operator delete(void* p)
+	{
+		cout << "operator delete" << endl;
+		free(p);
+	}
+	void operator delete[](void* p)
+	{
+		cout << "operator delete[]" << endl;
+		free(p);
+	}
+};
+
 int main()
 {
-	size_t a = -1;
-	int b = a+1;
-	cout << b;
+
+	A* p = new A[10];
+	delete[] p;
+	A* p1 = new A;
+	delete p1;
 	return 0;
 }
+//int main()
+//{
+//	size_t a = -1;
+//	int b = a+1;
+//	cout << b;
+//	return 0;
+//}
 //class Time
 //{
 //public:
