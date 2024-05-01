@@ -1,14 +1,80 @@
-#include<iostream>
-#include<string>
-using namespace std;
+#include"String.h"
 
+using leo::string;
 int main()
 {
-	string s1 = "bit.cpp.zip";
-	int pos = s1.rfind('.');
-	cout << s1.substr(pos);
+	
+	string s1 = "hello";
+	cin >> s1;
+	cout << s1<<endl;
+	int a = 0;
+	cin >> a;
+	cout << a<<endl;
+	/*s1.push_back(' ');
+	cout << s1<<endl;
+	s1.append("world");
+	cout << s1 << endl;
+	s1.insert(0, 'k');
+	cout << s1 << endl;
+	s1.erase(1,5);
+	cout << s1 << endl;*/
+	
 	return 0;
 }
+//int main()
+//{
+//	leo::string s1 = "hello word";
+//	leo::string s2=s1;
+//	//s2[2]++;
+//	/*s1.rsize(12,'c');
+//	s1.reverse(20);*/
+//	s1.append("hahah");
+//	s2.append("hahha");
+//	s2.push_back('c');
+//	for (auto i : s1)
+//	{
+//		cout << i << " ";
+//	}
+//	/*cout << s1 << endl;
+//	cout << s2;*/
+//	return 0;
+//}
+//int main()
+//{
+//	leo::string s1 = "hello";
+//	leo::string s2 = s1;
+//	for (int i = 0; i < s1.size(); i++)
+//	{
+//		s1[i]++;
+//		cout << s1[i] << " ";
+//	}
+//	cout << endl;
+//	for (int i = 0; i < s2.size(); i++)
+//	{
+//		s2[i]++;
+//		cout << s2[i] << " ";
+//	}
+//	cout << endl;
+//	leo::string s3 = "world";
+//	//leo::string s4=nullptr;
+//	s2 = s3;
+//	s3[0]++;
+//	for (int i = 0; i < s2.size(); i++)
+//	{
+//		cout << s2[i] << " ";
+//	}
+//	cout << endl;
+//	cout << s2.c_str() << endl;
+//	cout << s3.c_str() << endl;
+//	return 0;
+//}
+//int main()
+//{
+//	std::string s1 = "bit.cpp.zip";
+//	int pos = s1.rfind('.');
+//	cout << s1.substr(pos);
+//	return 0;
+//}
 //int main()
 //{
 //	string url = "https://cplusplus.com/reference/string/string/";
