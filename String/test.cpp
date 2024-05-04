@@ -1,26 +1,37 @@
 #include"String.h"
 
 using leo::string;
+
 int main()
 {
-	
-	string s1 = "hello";
-	cin >> s1;
-	cout << s1<<endl;
-	int a = 0;
-	cin >> a;
-	cout << a<<endl;
-	/*s1.push_back(' ');
-	cout << s1<<endl;
-	s1.append("world");
-	cout << s1 << endl;
-	s1.insert(0, 'k');
-	cout << s1 << endl;
-	s1.erase(1,5);
-	cout << s1 << endl;*/
-	
+	string s1="hello";
+	//cout << s1;
+	//cout << s1.find("lp");
 	return 0;
 }
+
+//int main()
+//{
+//	
+//	/*string s1 = "helloworld";
+//	
+//	cout <<s1.erase(2);*/
+//	//cin >> s1;
+//	//cout << s1<<endl;
+//	//int a = 0;
+//	//cin >> a;
+//	//cout << a<<endl;
+//	/*s1.push_back(' ');
+//	cout << s1<<endl;
+//	s1.append("world");
+//	cout << s1 << endl;
+//	s1.insert(0, 'k');
+//	cout << s1 << endl;
+//	s1.erase(1,5);
+//	cout << s1 << endl;*/
+//	
+//	return 0;
+//}
 //int main()
 //{
 //	leo::string s1 = "hello word";
