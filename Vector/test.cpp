@@ -189,6 +189,65 @@ void test7()
 	v2.pop_back();
 	print_vector(v2);
 }
+void test8()
+{
+	leo::vector<int> v1;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v1.push_back(4);
+	leo::vector<int> v2;
+	v2 = v1;
+	v1.push_back(5);
+	for (auto e : v2)
+		cout << e << " ";
+	print_vector(v2);
+}
+void test9()
+{
+	leo::vector<int> v1;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v1.push_back(4);
+	leo::vector<int> v2;
+	v2.push_back(20);
+	v2.push_back(200);
+	print_vector(v1);
+	print_vector(v2);
+
+	v2 = v1;
+	v1.pop_back();
+	v1.pop_back();
+	print_vector(v1);
+	print_vector(v2);
+}
+void test10()
+{
+	leo::vector<string> v1;
+	v1.push_back("11111111");
+	v1.push_back("11111111");
+
+	v1.push_back("11111111");
+	v1.push_back("11111111");
+
+	v1.push_back("11111111");
+	v1.push_back("11111111");
+	v1.push_back("11111111");
+	v1.push_back("11111111");
+	for (auto e : v1)
+		cout << e << endl;
+}
+void test11()
+{
+	leo::vector<int> v1;
+	v1.push_back(1);
+	v1.push_back(1);
+	v1.push_back(1);
+	leo::vector<int> v2;
+	v2.push_back(12);
+	v1 = v2;
+}
 int main()
 {
 	//test1();
@@ -197,7 +256,11 @@ int main()
 	//test4();
 	//test5();
 	//test6();
-	test7();
+	//test7();
+	//test8();
+	//test9();
+	//test10();
+	test11();
 	//int a= int();
 	//cout << a << endl;
 	return 0;

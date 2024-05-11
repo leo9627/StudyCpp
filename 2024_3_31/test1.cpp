@@ -49,15 +49,15 @@ public:
 	}
 };
 
-int main()
-{
-
-	A* p = new A[10];
-	delete[] p;
-	A* p1 = new A;
-	delete p1;
-	return 0;
-}
+//int main()
+//{
+//
+//	A* p = new A[10];
+//	delete[] p;
+//	A* p1 = new A;
+//	delete p1;
+//	return 0;
+//}
 //int main()
 //{
 //	size_t a = -1;

@@ -5,8 +5,6 @@ leo::string::string(const char* str )
 	_capacity =_size = strlen(str);
 	_str = new char[_capacity + 1];
 	strcpy(_str, str);
-	
-
 }
 leo::string::string(const string& s):_str(nullptr)
 {

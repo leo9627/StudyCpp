@@ -81,7 +81,7 @@ namespace leo
 		string& operator+=(const char c);
 		string& operator+=(const char* str);
 		string& operator<(const string& s);
-		string& operator=(const string& s);
+		string& operator==(const string& s);
 		string& operator<=(const string& s);
 		size_t size()const;
 		size_t capacity()const;

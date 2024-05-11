@@ -2,6 +2,7 @@
 #include<iostream>
 #include<cassert>
 #include<vector>
+#include<string>
 
 
 namespace leo
@@ -34,6 +35,31 @@ namespace leo
 				push_back(e);
 
 		}
+		/*vector<T>& operator=(const vector<T>& v)
+		{
+			if (this == &v)
+				return *this;
+			delete[] _start;
+			_finish=_start = new T[v.capacity()];
+			for (auto& e : v)
+			{
+				*_finish = e;
+				++_finish;
+			}
+			_end_storage = _start + v.capacity();
+			return *this;
+		}*/
+		vector<T>& operator=(vector<T> v)
+		{
+			swap(v);
+			return *this;
+		}
+		void swap(vector<T>& v)
+		{
+			::swap(_start, v._start);
+			::swap(_finish, v._finish);
+			::swap(_end_storage, v._end_storage);
+		}
 		iterator begin() { return _start; }
 		iterator end() { return _finish; }
 		const_iterator begin() const{ return _start; }
@@ -46,7 +72,12 @@ namespace leo
 				T* temp = new T[n];
 				if (_start)
 				{
-					memcpy(temp, _start, sizeof(T) * size());
+					//memcpy(temp, _start, sizeof(T) * size());
+					for (size_t i = 0; i < sz; i++)
+					{
+						temp[i] = _start[i];
+					}
+
 					delete[] _start;
 				}
 				_start = temp;
@@ -132,6 +163,14 @@ namespace leo
 		size_t capacity()const
 		{
 			return _end_storage - _start;
+		}
+		~vector()
+		{
+			if (_start)
+			{
+				delete[] _start;
+				_start = _finish = _end_storage = nullptr;
+			}
 		}
 	private:
 		iterator _start;
