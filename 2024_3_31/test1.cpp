@@ -49,6 +49,75 @@ public:
 	}
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Complex
+{
+	friend ostream& operator<<(ostream& out, const Complex& c);
+	friend Complex operator*(const Complex& c1, const Complex& c2);
+	friend istream& operator>>(istream& in, Complex& c);
+
+	int _a;
+	int _b;
+public:
+	Complex(int a=0,int b=0):_a(a),_b(b){}
+	Complex operator+(const Complex& c)const
+	{
+		int a = _a + c._a;
+		int b = _b + c._b;
+		return Complex(a, b);
+	}
+	Complex operator-(const Complex& c)const
+	{
+		int a = _a - c._a;
+		int b = _b - c._b;
+		return Complex(a, b);
+	}
+
+	Complex operator~()const
+	{
+		return Complex(_a, -_b);
+	}
+};
+ostream& operator<<(ostream& out, const Complex& c)
+{
+	out << c._a << "+" << c._b << "i";
+	return out;
+}
+istream& operator>>(istream& in, Complex& c)
+{
+	in >> c._a >> c._b;
+	return in;
+}
+Complex operator*(const Complex& c1,const Complex& c2)
+{
+	int a = c1._a * c2._a - c1._b * c2._b;
+	int b = c1._b * c2._a + c1._a * c2._b;
+	return Complex(a, b);
+}
+//int main()
+//{
+//	Complex c1(2, 2);
+//	Complex c2(2, 3);
+//	cout << c1*2;
+//	return 0;
+//}
 //int main()
 //{
 //

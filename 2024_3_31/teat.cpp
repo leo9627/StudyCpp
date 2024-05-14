@@ -163,21 +163,21 @@ public:
 		}
 	}
 };
-int main()
-{
-	task_manager t1;
-	t1.Insert_element(1);
-	t1.Insert_element(2);
-	t1.Insert_element(3);
-	t1.Insert_element(4);
-	t1.Pop_element();
-	t1.Pop_element();
-	t1.Pop_element();
-	t1.Pop_element();
-	t1.Insert_element(5);
-	cout << t1.Peek();
-	return 0;
-}
+//int main()
+//{
+//	task_manager t1;
+//	t1.Insert_element(1);
+//	t1.Insert_element(2);
+//	t1.Insert_element(3);
+//	t1.Insert_element(4);
+//	t1.Pop_element();
+//	t1.Pop_element();
+//	t1.Pop_element();
+//	t1.Pop_element();
+//	t1.Insert_element(5);
+//	cout << t1.Peek();
+//	return 0;
+//}
 struct student
 {
 	int _id;
