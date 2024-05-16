@@ -5,10 +5,10 @@ using namespace std;
 
 class A
 {
-private:
+public:
 	int a;
 public:
-	A(int b=1):a(b)
+	A(int b=772):a(b)
 	{
 		cout << "A(int b)" << endl;
 	}
@@ -16,6 +16,10 @@ public:
 	{
 		this->a = a.a;
 		cout << "A(const A& a)" << endl;
+	}
+	virtual void test(int x=10)
+	{
+		cout << "testA" << endl;
 	}
 	~A()
 	{
@@ -49,7 +53,58 @@ public:
 	}
 };
 
+class B:public A
+{
+public:
+	int a;
+public:
+	B(int b = 772) :a(b)
+	{
+		cout << "B(int B)" << endl;
+	}
+	B(const A& a)
+	{
+		this->a = a.a;
+		cout << "B(const B& a)" << endl;
+	}
+	void test(int x=10)
+	{
+		cout << "testB" << endl;
+	}
+	~B()
+	{
+		cout << "~B" << endl;
+	}
+};
 
+//class C :virtual public A
+//{
+//private:
+//	int a;
+//public:
+//	C(int _a = 100, int b = 20) :A(_a), a(b) {}
+//	int get() { return a; }
+//};
+//
+//class D :public B,public C
+//{
+//private:
+//	int a=10;
+//public:
+//	D(int _a = 10, int b = 2){}
+//	//int get() { return a; }
+//};
+
+int main()
+{
+	char c1[15] = "228345";
+	char c2[10]="222";
+	int a = 0x00000001;
+	int b = 0x00100002;
+
+	int ret = memcmp(&a, &b, sizeof(int));
+	return 0;
+}
 
 
 
