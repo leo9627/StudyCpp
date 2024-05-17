@@ -95,16 +95,6 @@ public:
 //	//int get() { return a; }
 //};
 
-int main()
-{
-	char c1[15] = "228345";
-	char c2[10]="222";
-	int a = 0x00000001;
-	int b = 0x00100002;
-
-	int ret = memcmp(&a, &b, sizeof(int));
-	return 0;
-}
 
 
 
