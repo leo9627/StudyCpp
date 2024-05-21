@@ -1,6 +1,10 @@
 #include"manager.h"
 
 
+Manager::Manager(const string& name , const string& password)
+	:_name(name)
+	, _password(password)
+{}
 vector<Book>::iterator Manager::Find_Book(const string& name, vector<Book>& book_arr)
 {
 	auto it = book_arr.begin();
@@ -8,6 +12,7 @@ vector<Book>::iterator Manager::Find_Book(const string& name, vector<Book>& book
 	{
 		if (it->_name == name)
 			break;
+		it++;
 	}
 	return it;
 }
@@ -27,6 +32,7 @@ void Manager::Add_Book(vector<Book>& book_arr)
 	}
 	Book b1 = { name,id };
 	book_arr.push_back(b1);
+	cout << "执行成功！！！！" << endl;
 
 }
 void Manager::Delete_Book(vector<Book>& book_arr)
@@ -46,6 +52,7 @@ void Manager::Delete_Book(vector<Book>& book_arr)
 		return;
 	}
 	book_arr.erase(it);
+	cout << "执行成功！！！！" << endl;
 }
 vector<Reader>::iterator Manager::Find_Reader(const string& name, vector<Reader>& Reader_arr)
 {
@@ -54,6 +61,7 @@ vector<Reader>::iterator Manager::Find_Reader(const string& name, vector<Reader>
 	{
 		if (it->_name == name)
 			break;
+		it++;
 	}
 	return it;
 }
@@ -73,6 +81,7 @@ void Manager::Add_Reader(vector<Reader>& Reader_arr)
 	}
 	Reader b1 = { name,password };
 	Reader_arr.push_back(b1);
+	cout << "执行成功！！！！" << endl;
 }
 void Manager::Delete_Reader(vector<Reader>& Reader_arr, vector<Book>& book_arr)
 {
@@ -95,9 +104,26 @@ void Manager::Delete_Reader(vector<Reader>& Reader_arr, vector<Book>& book_arr)
 		it->_borrow_number--;
 	}
 	Reader_arr.erase(it);
+	cout << "执行成功！！！！" << endl;
 }
 void Manager::Modify_Reader(vector<Reader>& Reader_arr)
 {
-
+	cout << "输入需要修改的用户名:";
+	string name;
+	cin >> name;
+	vector<Reader>::iterator it = Find_Reader(name, Reader_arr);
+	if (it == Reader_arr.end())
+	{
+		cout << "该用户不存在" << endl;
+		return;
+	}
+	cout << "输入新的用户名:";
+	string newName;
+	cin >> newName;
+	cout << "输入新的密码:";
+	string newpassword;
+	cin >> newpassword;
+	it->_name = newName;
+	it->_password = newpassword;
+	cout << "执行成功！！！！" << endl;
 }
-

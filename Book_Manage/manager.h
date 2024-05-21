@@ -1,6 +1,7 @@
 #pragma once
 #include"Reader.h"
 
+
 class Manager
 {
 	template<class Container>
@@ -9,10 +10,7 @@ private:
 	string _name;
 	string _password;
 public:
-	Manager(const string& name="", const string& password = "")
-		:_name(name)
-		,_password(password)
-	{}
+	Manager(const string& name = "", const string& password = "");
 	void Add_Book(vector<Book>& book_arr);
 	void Delete_Book(vector<Book>& book_arr);
 	vector<Book>::iterator Find_Book(const string& name, vector<Book>& book_arr);
@@ -21,4 +19,3 @@ public:
 	void Delete_Reader(vector<Reader>& Reader_arr, vector<Book>& book_arr);
 	void Modify_Reader(vector<Reader>& Reader_arr);
 };
-

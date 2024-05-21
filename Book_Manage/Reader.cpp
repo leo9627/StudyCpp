@@ -55,14 +55,14 @@ void Reader::return_book(vector<Book>& book_arr)
 	{
 		if (!(e >= '0' && e <= '9'))
 		{
-			cout << "Ö´ÐÐ´íÎó£¡£¡£¡" << endl;
+			cout << "ÊäÈë´íÎó£¡£¡£¡" << endl;
 			return;
 		}
 	}
 	int i = stoi(s);
 	if (i > _borrow_book.size()||i<=0)
 	{
-		cout << "Ö´ÐÐ´íÎó£¡£¡£¡" << endl;
+		cout << "ÊäÈë´íÎó£¡£¡£¡" << endl;
 		return;
 	}
 	for (auto& e : book_arr)

@@ -11,17 +11,16 @@ struct Book
 	bool _borrow=false;
 	string _Reader_name = "";
 };
-
 class Reader
 {
+	friend class Manager;
 	template<class Container>
 	friend auto Login(const string& name, const string& password, Container& arr);
 	friend void BorrowBook(const string& name, const string& password);
-	friend class Manager;
 private:
 	string _name;
 	string _password;
-	int _borrow_number=0;
+	int _borrow_number;
 	vector<Book> _borrow_book;
 public:
 	Reader(const string& name, const string& password);

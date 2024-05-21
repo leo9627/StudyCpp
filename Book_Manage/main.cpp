@@ -10,7 +10,6 @@ void Menu()
 	cout << "ÊäÈëÑ¡Ôñ:";
 }
 template<class Container>
-//typedef vector<Manager> Container;
 auto Login(const string& name, const string& password, Container& arr)
 {
 	auto it = arr.begin();
@@ -54,20 +53,68 @@ void Book_Manage(const string& name, const string& password)
 		cout << "ÕËºÅ»òÃÜÂë´íÎó";
 		return;
 	}
-	it->Add_Book(Book_arr);
-	it->Delete_Book(Book_arr);
+	int select = 0;
+	cout << "1.Ìí¼ÓÍ¼Êé   2.É¾³ýÍ¼Êé" << endl;
+	string s;
+	cout << "ÊäÈëÑ¡Ôñ:";
+	cin >> s;
+	for (auto& e : s)
+	{
+		if (!(e >= '0' && e <= '9'))
+		{
+			cout << "ÊäÈë´íÎó£¡£¡£¡" << endl;
+			return;
+		}
+	}
+	select = stoi(s);
+	switch (select)
+	{
+	case 1:
+		it->Add_Book(Book_arr);
+		break;
+	case 2:
+		it->Delete_Book(Book_arr);
+		break;
+	default:
+		cout << "ÊäÈë´íÎó£¡£¡" << endl;
+	}
 }
 void Reader_Manage(const string& name, const string& password)
 {
 	auto it = Login(name, password, Manager_arr);
 	if (it == Manager_arr.end())
 	{
-		cout << "ÕËºÅ»òÃÜÂë´íÎó";
+		cout << "ÕËºÅ»òÃÜÂë´íÎó" << endl;
 		return;
 	}
-	it->Add_Reader(Reader_arr);
-	it->Delete_Reader(Reader_arr, Book_arr);
-	it->Modify_Reader(Reader_arr);
+	int select = 0;
+	cout << "1.Ìí¼Ó¶ÁÕßÐÅÏ¢  2.ÐÞ¸Ä¶ÁÕßÐÅÏ¢  3.É¾³ý¶ÁÕßÐÅÏ¢" << endl;
+	string s;
+	cout << "ÊäÈëÑ¡Ôñ:";
+	cin >> s;
+	for (auto& e : s)
+	{
+		if (!(e >= '0' && e <= '9'))
+		{
+			cout << "ÊäÈë´íÎó£¡£¡£¡" << endl;
+			return;
+		}
+	}
+	select = stoi(s);
+	switch (select)
+	{
+	case 1:
+		it->Add_Reader(Reader_arr);
+		break;
+	case 2:
+		it->Modify_Reader(Reader_arr);
+		break;
+	case 3:
+		it->Delete_Reader(Reader_arr, Book_arr);
+		break;
+	default:
+		cout << "ÊäÈë´íÎó" << endl;
+	}
 }
 int main()
 {
@@ -107,4 +154,3 @@ int main()
 	} while (select);
 	return 0;
 }
-
