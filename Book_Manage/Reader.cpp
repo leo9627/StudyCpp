@@ -1,80 +1,62 @@
 #include"Reader.h"
-
-
-Reader::Reader(const string& name, const string& password)
-	:_name(name)
-	, _password(password)
-{
-	_borrow_number = 0;
-}
-
+Reader::Reader(const string& name, const string& password,int x)
+	:Person(name,password)
+	,_borrow_number(x)
+{}
 void Reader::borrow_book(const string& book_name, vector<Book>& book_arr)
 {
 	if (_borrow_book.size() == 5)
 	{
-		cout << "已借5本" << endl;
+		cout << "Warning:已借5本,已达上限!!!" << endl;
 		return;
 	}
-	for (auto& e : book_arr)
+	auto it = Find_Book(book_name, book_arr);
+	if (it == book_arr.end())
 	{
-		if (e._name == book_name)
-		{
-			if (e._borrow == true)
-			{
-				cout << "已被借阅" << endl;
-				return;
-			}
-			e._borrow = true;
-			e._Reader_name = _name;
-			_borrow_book.push_back(e);
-			_borrow_number++;
-			cout << "借阅成功!!!!" << endl;
-			return;
-		}
+		cout << "Warning:该书籍不存在!!!" << endl;
+		return;
 	}
-	cout << "没有这本书" << endl;
-
+	if (it->_borrow == true)
+	{
+		cout << "Warning:该书籍已被借阅!!!" << endl;
+		return;
+	}
+	it->_borrow = true;
+	it->_Reader_name = _name;
+	_borrow_book.push_back(*it);
+	_borrow_number++;
+	cout << "Notice:借阅成功!!!!" << endl;
 }
 void Reader::return_book(vector<Book>& book_arr)
 {
 	int num = 1;
 	if (_borrow_book.size() == 0)
 	{
-		cout << "没有借阅书籍！！！" << endl;
+		cout << "Notice:无借阅书籍!!!" << endl;
 		return;
 	}
+	//打印
+	sort(_borrow_book.begin(), _borrow_book.end());
+	cout << "--------------------------------" << endl;
+	cout << "     已借阅的书籍     |  图书ID" << endl;
 	for (auto& e : _borrow_book)
 	{
-		cout <<num<<"  "<< e._name << "   " << e._ID << endl;
+		cout <<"("<<num<<")  " <<setw(17) <<std::left<< e._name << "|  " << e._ID << endl;
 		num++;
 	}
+	cout << "--------------------------------" << endl;
 	string s ;
-	cout << "输入需要归还书籍的序号：";
+	cout << "请输入需要归还书籍的ID：";
 	cin >> s;
-	for (auto& e : s)
+	auto it1 = Find_Book(s, _borrow_book);
+	auto it2 = Find_Book(s, book_arr);
+	if (it1 == _borrow_book.end() || it2 == book_arr.end())
 	{
-		if (!(e >= '0' && e <= '9'))
-		{
-			cout << "输入错误！！！" << endl;
-			return;
-		}
+		cout << "Warning:输入错误!!!" << endl;
 	}
-	int i = stoi(s);
-	if (i > _borrow_book.size()||i<=0)
-	{
-		cout << "输入错误！！！" << endl;
-		return;
-	}
-	for (auto& e : book_arr)
-	{
-		if (e._name == _borrow_book[i-1]._name)
-		{
-			e._Reader_name = "";
-			e._borrow = false;
-			_borrow_book.erase(_borrow_book.begin() + i - 1);
-			_borrow_number--;
-			cout << "归还成功" << endl;
-			return;
-		}
-	}
+	it2->_Reader_name = "";
+	it2->_borrow = false;
+	_borrow_book.erase(it1);
+	_borrow_number--;
+	cout << "Notice:归还成功!!!" << endl;
 }
