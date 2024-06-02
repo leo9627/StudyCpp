@@ -139,43 +139,55 @@ using namespace std;
 //	return 0;
 //}
 
-class A
-{
-public:
-	A(int x=1)
-	{
-		cout << "A()" << endl;
-	}
-	virtual void PrintA()
-	{
+//class A
+//{
+//public:
+//	A(int x=1)
+//	{
+//		cout << "A()" << endl;
+//	}
+//	virtual void PrintA()
+//	{
+//
+//	}
+//	int b;
+//};
+//
+//class B:virtual public A
+//{
+//public:
+//	B(int x = 1)
+//	{
+//		cout << "A()" << endl;
+//	}
+//	virtual void PrintA()
+//	{
+//
+//	}
+//	virtual void f()
+//	{
+//
+//	}
+//	int a;
+//};
+//
+//int main()
+//{
+//	B b;
+//	b.a = 1;
+//	b.b = 2;
+//	cout << sizeof B << endl;
+//	return 0;
+//}
 
-	}
-	int b;
-};
 
-class B:virtual public A
-{
-public:
-	B(int x = 1)
-	{
-		cout << "A()" << endl;
-	}
-	virtual void PrintA()
-	{
-
-	}
-	virtual void f()
-	{
-
-	}
-	int a;
-};
-
-int main()
-{
-	B b;
-	b.a = 1;
-	b.b = 2;
-	cout << sizeof B << endl;
-	return 0;
-}
+//class A final
+//{
+//public:
+//	int a;
+//};
+//
+//class B:public A
+//{
+//
+//};
