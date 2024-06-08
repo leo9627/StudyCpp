@@ -10,20 +10,20 @@ using namespace std;
 
 struct Node
 {
-	long long degree;
-	vector<long long> Nv;
+	int degree;
+	vector<int> Nv;
 };
 vector<Node*> v(1000001, nullptr);
 vector<Node*> v1(1000001, nullptr);
-vector<long long> v2;
+vector<int> v2;
 long long ms, ns, bs;
-queue<long long> qe;
+queue<int> qe;
 
-void mydelete(long long k)
+void mydelete(int k)
 {
 	while (!qe.empty())
 	{
-		long long inode = qe.front();
+		int inode = qe.front();
 		if (v1[inode]->degree==0 || v1[inode]->degree > k)
 		{
 			qe.pop();
@@ -44,19 +44,19 @@ void mydelete(long long k)
 		qe.pop();
 	}
 }
-bool cmp(long long x, long long y)
+bool cmp(int x, int y)
 {
 	return v1[x]->degree > v1[y]->degree;
 }
 int main()
 {
-	long long n, m;
-	scanf("%lld %lld", &n, &m);
+	int n, m;
+	scanf("%d %d", &n, &m);
 	long long M, N, B;
 	scanf("%lld %lld %lld", &M, &N, &B);
-	for (long long i = 0; i < m; i++)
+	for (int i = 0; i < m; i++)
 	{
-		long long a, b;
+		int a, b;
 		cin >> a >> b;
 		if (v[a] == nullptr)
 		{
@@ -91,7 +91,7 @@ int main()
 			v1[b]->Nv.push_back(a);
 		}
 	}
-	for (long long i = 1; i <= n; i++)
+	for (int i = 1; i <= n; i++)
 	{
 		if (v[i])
 		{
@@ -100,7 +100,7 @@ int main()
 			
 	}
 	
-	map<long long, long long> _map;
+	map<long long, int> _map;
 	ns = m;
 	bs = 0;
 	long long maxscore = 0;
@@ -108,10 +108,10 @@ int main()
 	while (!v2.empty())
 	{
 		sort(v2.begin(), v2.end(), cmp);
-		long long k = 0;
+		int k = 0;
 		if (v1[v2[0]]->degree ==0)
 			break;
-		for (long long i = v2.size() - 1; i >= 0; i--)
+		for (int i = v2.size() - 1; i >= 0; i--)
 		{
 			if (v1[v2[i]]->degree != 0)
 			{
@@ -148,7 +148,7 @@ int main()
 
 
 
-		for (long long i = v2.size() - 1; i >= 0; i--)
+		for (int i = v2.size() - 1; i >= 0; i--)
 		{
 			if (v1[v2[i]]->degree == k)
 			{
@@ -162,6 +162,6 @@ int main()
 		mydelete(k);
 
 	}
-	printf("%lld %lld", _map[maxscore], maxscore);
+	printf("%lld %d", _map[maxscore], maxscore);
 	return 0;
 }
