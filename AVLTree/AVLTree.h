@@ -118,6 +118,22 @@ public:
 	{
 		return _IsBalance(_root);
 	}
+	bool Find(const K& key)
+	{
+		Node* cur = _root;
+		while (cur)
+		{
+			if (cur->_data.first < key)
+			{
+				cur = cur->_right;
+			}
+			else if (cur->_data.first > key)
+				cur = cur->_left;
+			else
+				return true;
+		}
+		return false;
+	}
 private:
 	bool _IsBalance(Node* root)
 	{
