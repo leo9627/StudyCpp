@@ -8,16 +8,16 @@ enum Colour
 	RED,
 };
 
-template<class K,class V>
+template<class T>
 struct RBTNode
 {
-	RBTNode<K, V>* _left;
-	RBTNode<K, V>* _right;
-	RBTNode<K, V>* _parent;
+	RBTNode<T>* _left;
+	RBTNode<T>* _right;
+	RBTNode<T>* _parent;
 
 	Colour _colour;
-	pair<K, V> _data;
-	RBTNode(const pair<K,V>& data)
+	T _data;
+	RBTNode(const T& data)
 		:_left(nullptr)
 		,_right(nullptr)
 		,_parent(nullptr)
@@ -25,47 +25,102 @@ struct RBTNode
 	{}
 };
 
-template<class K,class V>
+template<class T,class Ref,class Ptr>
+class RBTree_iterator
+{
+	typedef RBTNode<T> Node;
+	//typedef RBTree_iterator Self;
+	typedef RBTree_iterator<T, T&, T*> Self;
+public:
+	RBTree_iterator(Node* root)
+		:_root(root)
+	{}
+	Self& operator++()
+	{
+		if (_root->_right)
+		{
+			_root = _root->_right;
+			while (_root->_left)
+				_root = _root->_left;
+		}
+		else
+		{
+			Node* cur = _root;
+			Node* parent = _root->_parent;
+			while (parent && cur == parent->_right)
+			{
+				cur = parent;
+				parent = cur->_parent;
+			}
+			_root = parent;
+		}
+		return *this;
+	}
+	Self& operator--()
+	{
+
+		return *this;
+	}
+	bool operator!=(Self& p)
+	{
+		return _root != p._root;
+	}
+	Ref operator*()
+	{
+		return _root->_data;
+	}
+	Ptr operator->()
+	{
+		return &_root->_data;
+	}
+
+private:
+	Node* _root;
+};
+template<class K,class T,class KEYOFT>
 class RBTree
 {
-	typedef RBTNode<K, V> Node;
 public:
-	bool Insert(const pair<K, V>& data)
+	typedef RBTNode<T> Node;
+	typedef RBTree_iterator<T, T&, T*> iterator;
+public:
+	pair<iterator,bool> Insert(const T& data)
 	{
 		if (_root == nullptr)
 		{
 			_root = new Node(data);
 			_root->_colour = BLACK;
-			return true;
+			return make_pair(iterator(_root),true);
 		}
 
 		Node* parent = nullptr;
 		Node* cur = _root;
+		KEYOFT keyoft;
 		while (cur)
 		{
-			if (cur->_data.first < data.first)
+			if (keyoft(cur->_data) < keyoft(data))
 			{
 				parent = cur;
 				cur = cur->_right;
 			}
-			else if (cur->_data.first > data.first)
+			else if (keyoft(cur->_data) > keyoft(data))
 			{
 				parent = cur;
 				cur = cur->_left;
 			}
 			else
 			{
-				return false;
+				return make_pair(iterator(cur),false);
 			}
 		}
 		cur = new Node(data);
-		if (parent->_data.first < data.first)
+		if (keyoft(parent->_data) < keyoft(data))
 			parent->_right = cur;
 		else
 			parent->_left = cur;
 		cur->_parent = parent;
 		cur->_colour = RED;
-
+		iterator ret = iterator(cur);
 
 		while (parent && parent->_colour == RED)
 		{
@@ -124,7 +179,20 @@ public:
 			}
 		}
 		_root->_colour = BLACK;
-		return true;
+		return make_pair(ret,true);
+	}
+	iterator begin()
+	{
+		Node* cur = _root;
+		while (cur->_left)
+		{
+			cur = cur->_left;
+		}
+		return iterator(cur);
+	}
+	iterator end()
+	{
+		return iterator(nullptr);
 	}
 	void InOrder()
 	{

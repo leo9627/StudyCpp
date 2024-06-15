@@ -53,6 +53,7 @@ void Reader::return_book(vector<Book>& book_arr)
 	if (it1 == _borrow_book.end() || it2 == book_arr.end())
 	{
 		cout << "Warning:ÊäÈë´íÎó!!!" << endl;
+		return;
 	}
 	it2->_Reader_name = "";
 	it2->_borrow = false;
