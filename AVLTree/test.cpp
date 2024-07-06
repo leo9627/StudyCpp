@@ -11,10 +11,26 @@ int main()
 {
 	leo::map<string, int> count;
 	string arr[] = { "苹果","香蕉", "西瓜", "苹果" ,"香蕉" ,"西瓜", "西瓜", "苹果", "苹果" };
-	for (auto& e : arr)
+	/*for (auto& e : arr)
 	{
 		count[e]++;
+	}*/
+
+	for (auto& e : arr)
+	{
+		auto it = count.Find(e);
+		auto it1 = count.end();
+		if (it != it1)
+		{
+			it->second++;
+		}
+		else
+		{
+			count.Insert(make_pair(e, 1));
+		}
 	}
+	//auto it = count.Find("苹果");
+	//cout << it->second << endl;
 	for (auto& e : count)
 	{
 		cout << e.first << ":" << e.second << endl;

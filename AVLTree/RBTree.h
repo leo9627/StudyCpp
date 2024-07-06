@@ -29,8 +29,7 @@ template<class T,class Ref,class Ptr>
 class RBTree_iterator
 {
 	typedef RBTNode<T> Node;
-	//typedef RBTree_iterator Self;
-	typedef RBTree_iterator<T, T&, T*> Self;
+	typedef RBTree_iterator<T, Ref, Ptr> Self;
 public:
 	RBTree_iterator(Node* root)
 		:_root(root)
@@ -58,10 +57,15 @@ public:
 	}
 	Self& operator--()
 	{
+		if (_root == nullptr)
+		{
+
+		}
+
 
 		return *this;
 	}
-	bool operator!=(Self& p)
+	bool operator!=(const Self& p)const
 	{
 		return _root != p._root;
 	}
@@ -202,21 +206,21 @@ public:
 	{
 		return _IsBalance(_root);
 	}
-	bool Find(const K& key)
+	iterator Find(const K& key)
 	{
 		Node* cur = _root;
 		while (cur)
 		{
-			if (cur->_data.first < key)
+			if (KEYOFT()(cur->_data)< key)
 			{
 				cur = cur->_right;
 			}
-			else if (cur->_data.first > key)
+			else if (KEYOFT()(cur->_data) > key)
 				cur = cur->_left;
 			else
-				return true;
+				return iterator(cur);
 		}
-		return false;
+		return iterator(nullptr);
 	}
 private:
 	bool _IsBalance(Node* root)

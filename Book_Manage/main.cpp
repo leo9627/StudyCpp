@@ -197,7 +197,7 @@ void Read_Data()
 	int num = 0;
 
 	//读者信息导入
-	ifstream f1("读者信息.txt", ios::in);
+	ifstream f1(file1, ios::in);
 	if (f1)
 	{
 		while (f1 >> name >> password >> num)

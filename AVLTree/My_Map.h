@@ -31,6 +31,10 @@ namespace leo
 		{
 			return _tree.end();
 		}
+		iterator Find(const K& key)
+		{
+			return _tree.Find(key);
+		}
 	private:
 		RBTree<K, pair<K, V>, Keyoft> _tree;
 	};
