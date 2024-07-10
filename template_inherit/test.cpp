@@ -169,48 +169,62 @@ using namespace std;
 class A
 {
 public:
-
+	virtual void f();
 	int _a1;
 	int _a2;
 };
+inline void A::f()
+{
+	cout << "2";
+}
 
 
-class B :virtual public A
+class B :public A
 {
 public:
+	void f();
 	int _b;
 };
-
-class C :virtual public A
+inline void B::f()
 {
-public:
-	int _c;
-};
-class D :public C, public B
+	cout << "1";
+}
+int main()
 {
-public:
-	int _d;
-};
-
-int test3()
-{
-	cout << sizeof(D) << endl;
-	D d;
-	d.B::_a1 = 1;
-	d.B::_a2 = 1;
-	d._b = 2;
-	d.C::_a1 = 3;
-	d.C::_a2 = 3;
-	d._c = 4;
-	d._d = 5;
+	A* p = new A;
+	p->f();
 	return 0;
 }
+//class C :virtual public A
+//{
+//public:
+//	int _c;
+//};
+//class D :public C, public B
+//{
+//public:
+//	int _d;
+//};
+
+//int test3()
+//{
+//	cout << sizeof(D) << endl;
+//	D d;
+//	d.B::_a1 = 1;
+//	d.B::_a2 = 1;
+//	d._b = 2;
+//	d.C::_a1 = 3;
+//	d.C::_a2 = 3;
+//	d._c = 4;
+//	d._d = 5;
+//	return 0;
+//}
 class Student;
 class Person
 {
 	friend void friend_Person(Person& p, Student& s);
 public:
-	Person(const char* str)
+	Person(const char* str="HA")
 	{
 		_name =str;
 		cout << "Person()" << endl;
@@ -267,10 +281,12 @@ void friend_Person(Person& p,Student& s)
 	cout << s._name<<endl;
 	//cout << s._id;
 }
-int main()
-{
-	Student s;
-	Person p("rose");
-	friend_Person(p, s);
-	return 0;
-}
+//int main()
+//{
+//	Student s;
+//	Student s1(s);
+//	//Person p("rose");
+//	//friend_Person(p, s);
+//	return 0;
+//}
+

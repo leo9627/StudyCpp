@@ -3,9 +3,9 @@
 #include<unordered_set>
 #include<map>
 #include<set>
-#include"hashtable.h"
+//#include"hashtable.h"
 using namespace std;
-using namespace leo;
+//using namespace leo;
 
 
 void test_hash()
@@ -100,5 +100,8 @@ int main()
 {
 	//test_hash();
 	test_op();
+
+	int a = 10;
+	int* const p = &a;
 	return 0;
 }
