@@ -11,47 +11,118 @@
 #include <iomanip>
 #include<algorithm>
 using namespace std;
-
-vector<int> a;
-vector<int> b;
-size_t sum = 0;
 const size_t mod = 998244353;
-void f(int i,int& n,int c)
-{
-	if (i == n )
-	{
-		sum=(sum+1)%mod;
-		return;
-	}
-	for (int k = a[i]; k <= b[i]; k++)
-	{
-		if(k>=c)
-			f(i + 1, n, k);
-	}
-}
-
+long long S[3001][3001] = { 0 };
 int main()
 {
 	int n = 0;
 	cin >> n;
-	a.reserve(n);
-	b.reserve(n);
+	vector<int> A;
+	vector<int> B;
+	A.reserve(n);
+	B.reserve(n);
 	for (int i = 0; i < n; i++)
 	{
-		int t = 0;
+		int t;
 		cin >> t;
-		a.push_back(t);
+		A.push_back(t);
 	}
 	for (int i = 0; i < n; i++)
 	{
-		int t = 0;
+		int t;
 		cin >> t;
-		b.push_back(t);
+		B.push_back(t);
 	}
-	f(0, n,0);
-	cout << sum;
+	int num = 1;
+	for (int i = A[0]; i <= B[0]; i++)
+	{
+		S[1][i] = num++;
+	}
+	long long last = --num;
+	for (int i = B[0] + 1; i <= 3000; i++)
+	{
+		S[1][i] = last;
+	}
+	for (int i = 2; i <= n; i++)
+	{
+		for (int j = A[i - 1]; j <= B[i - 1]; j++)
+		{
+			if (j == 0)
+			{
+				last=S[i][j] = S[i - 1][j];
+			}
+			else
+			{
+				last=S[i][j] = (S[i][j - 1] + S[i - 1][j])%mod;
+			}
+		}
+		for (int j = B[i - 1] + 1; j <= 3000; j++)
+		{
+			S[i][j] = last;
+		}
+
+	}
+	cout << S[n][B[n - 1]];
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//vector<int> a;
+//vector<int> b;
+//size_t sum = 0;
+//void f(int i,int& n,int c)
+//{
+//	if (i == n )
+//	{
+//		sum=(sum+1)%mod;
+//		return;
+//	}
+//	for (int k = a[i]; k <= b[i]; k++)
+//	{
+//		if(k>=c)
+//			f(i + 1, n, k);
+//	}
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//	a.reserve(n);
+//	b.reserve(n);
+//	for (int i = 0; i < n; i++)
+//	{
+//		int t = 0;
+//		cin >> t;
+//		a.push_back(t);
+//	}
+//	for (int i = 0; i < n; i++)
+//	{
+//		int t = 0;
+//		cin >> t;
+//		b.push_back(t);
+//	}
+//	f(0, n,0);
+//	cout << sum;
+//	return 0;
+//}
 
 
 
