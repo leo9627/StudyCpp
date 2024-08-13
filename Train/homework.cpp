@@ -15,48 +15,71 @@
 using namespace std;
 const size_t mod = 998244353;
 
-void solve()
-{
-	int n = 0;
-	cin >> n;
-	vector<int> v;
-	v.resize(n);
-	unordered_map<int,int> ust;
-	for (int i = 0; i < n; i++)
-	{
-		int t = 0;
-		cin >> t;
-		v[i]=t;
-		ust[t]++;
-	}
-	int ans = 0;
-
-	for (int i = 0; i < n; i++)
-	{
-		int sum = v[i];
-		for (int j = i + 1; j < n; j++)
-		{
-			sum += v[j];
-			if (ust.find(sum) != ust.end())
-			{
-				ans += ust[sum];
-				ust[sum] = 0;
-			}
-		}
-	}
-	cout << ans << endl;
-
-}
-
-
 int main()
 {
 	int t = 0;
 	cin >> t;
 	while (t--)
-		solve();
+	{
+		int n = 0;
+		int m = 0;
+		cin >> n >> m;
+		if (n == 1)
+			cout << 0 << endl;
+		else if (n == 2)
+			cout << m << endl;
+		else
+			cout << 2 * m << endl;
+	}
 	return 0;
 }
+
+
+
+
+
+//void solve()
+//{
+//	int n = 0;
+//	cin >> n;
+//	vector<int> v;
+//	v.resize(n);
+//	unordered_map<int,int> ust;
+//	for (int i = 0; i < n; i++)
+//	{
+//		int t = 0;
+//		cin >> t;
+//		v[i]=t;
+//		ust[t]++;
+//	}
+//	int ans = 0;
+//
+//	for (int i = 0; i < n; i++)
+//	{
+//		int sum = v[i];
+//		for (int j = i + 1; j < n; j++)
+//		{
+//			sum += v[j];
+//			if (ust.find(sum) != ust.end())
+//			{
+//				ans += ust[sum];
+//				ust[sum] = 0;
+//			}
+//		}
+//	}
+//	cout << ans << endl;
+//
+//}
+//
+//
+//int main()
+//{
+//	int t = 0;
+//	cin >> t;
+//	while (t--)
+//		solve();
+//	return 0;
+//}
 
 
 
