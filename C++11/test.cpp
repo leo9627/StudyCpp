@@ -3,6 +3,8 @@
 #include<vector>
 #include<functional>
 #include<algorithm>
+#include<thread>
+#include<Windows.h>
 
 using namespace std;
 
@@ -375,33 +377,33 @@ void ShowList(Args... args)
 //	return 0;
 //}
 
-struct Goods
-{
-	string _name;
-	double _price;
-	int _nums;
-};
-struct Compare
-{
-	bool operator()(const Goods& g1, const Goods& g2)
-	{
-		return g1._name < g2._name;
-	}
-};
-int main()
-{
-	Goods arr[] = { { "苹果", 2.1, 5 }, { "香蕉", 3, 4 }, { "橙子", 2.2,3 }, { "菠萝", 1.5, 4 } };
-	sort(arr,
-		arr + sizeof(arr) / sizeof(arr[0]), 
-		[](const Goods& g1, const Goods& g2)->bool {
-			return g1._price < g2._price;
-		});
-	auto f1 = [](const Goods& g1, const Goods& g2)->bool {
-		return g1._nums < g2._nums;
-		};
-	sort(arr, arr + sizeof(arr) / sizeof(arr[0]), f1);
-	return 0;
-}
+//struct Goods
+//{
+//	string _name;
+//	double _price;
+//	int _nums;
+//};
+//struct Compare
+//{
+//	bool operator()(const Goods& g1, const Goods& g2)
+//	{
+//		return g1._name < g2._name;
+//	}
+//};
+//int main()
+//{
+//	Goods arr[] = { { "苹果", 2.1, 5 }, { "香蕉", 3, 4 }, { "橙子", 2.2,3 }, { "菠萝", 1.5, 4 } };
+//	sort(arr,
+//		arr + sizeof(arr) / sizeof(arr[0]), 
+//		[](const Goods& g1, const Goods& g2)->bool {
+//			return g1._price < g2._price;
+//		});
+//	auto f1 = [](const Goods& g1, const Goods& g2)->bool {
+//		return g1._nums < g2._nums;
+//		};
+//	sort(arr, arr + sizeof(arr) / sizeof(arr[0]), f1);
+//	return 0;
+//}
 
 
 //template<class F, class T>
@@ -452,3 +454,135 @@ int main()
 //	//cout << f1(2,1,5);
 //	return 0;
 //}
+
+//template<class T>
+//int PrintArg(T&& x)
+//{
+//	cout << x << endl;
+//	return 0;
+//}
+
+
+//template <class ...Args>
+//void ShowList(Args... args)
+//{
+//	int arr[] = { PrintArg(args)... };
+//	cout << endl;
+//}
+// 
+//
+//
+//// 编译推演生成下面的函数
+////void ShowList(int x, char y, std::string z)
+////{
+////	int arr[] = { PrintArg(x),PrintArg(y),PrintArg(z) };
+////	cout << endl;
+////}
+//
+//int main()
+//{
+//	//ShowList(1);
+//	//ShowList(1, 'A');
+//	ShowList(1, 'A', std::string("sort"));
+//
+//	return 0;
+//}
+
+
+class A
+{
+public:
+	static void f1(int a, int b)
+	{
+		cout << "f1" << endl;
+	}
+	void f2(int a, int b)
+	{
+		cout << "f2" << endl;
+	}
+};
+#include<functional>
+#include<map>
+
+//int main()
+//{
+//	function<void(int, int)> f1 = &A::f1;
+//	f1(1, 2);
+//	function<void(A,int, int)> f2 = &A::f2;  //非静态成员函数
+//	function<void(A&&, int, int)> f3 = &A::f2;
+//	function<void(A*, int, int)> f4 = &A::f2;
+//	f2(A(),1, 2);
+//	f3(A(),1, 2);
+//	A a;
+//	f4(&a,1, 2);
+//
+//	return 0;
+//}
+
+
+int Div(int a, int b)
+{
+	return a / b;
+}
+class Sub
+{
+public:
+	Sub(int&& x)
+		:_x(x)
+	{}
+	int operator()(int a, int b)
+	{
+		return (a - b) * _x;
+	}
+private:
+	int _x;
+};
+
+
+int x5()
+{
+	function<int(int)> Half = bind(Div, placeholders::_1, 2);
+	cout << Half(4)<<endl;
+
+	cout << Sub(10)(4, 2);
+
+	map<string, function<int(int, int)>> mp{
+		{"+",[](int a,int b)->int {return a + b; }},
+		{"/",[](int a,int b)->int {return a / b; }},
+		{"*",[](int a,int b)->int {return a * b; }},
+		{"-",bind(Sub(1),placeholders::_1,placeholders::_2) }
+	};
+	while (true)
+	{
+		string s;
+		cin >> s;
+		int a, b;
+		cin >> a >> b;
+		cout << mp[s](a, b);
+	}
+	
+	return 0;
+}
+
+
+
+int main()
+{
+	int a = 10;
+	thread t1 = thread([&] {
+
+		a += 20;
+	});
+	thread t2 = thread([&] {
+
+		a += 30;
+	});
+	Sleep(1);
+
+	cout << a<<endl;
+	Sleep(100);
+	cout << a << endl;
+	t1.join();
+	t2.join();
+	return 0;
+}
